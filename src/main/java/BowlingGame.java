@@ -11,7 +11,7 @@ public class BowlingGame {
         int index = 0;
         int[] scoreArray = new int[24];
         for (int i = 0; i < scoreArray.length; i++) {
-            scoreArray[i] = -2;
+            scoreArray[i] = 0;
         }
         for (int i = 0; i < downSituation.length; i++) {
             index = saveSore(scoreArray, downSituation[i], index);
@@ -24,8 +24,7 @@ public class BowlingGame {
     public int saveSore(int[] scoreArray, int score, int index) {
         scoreArray[index] = score;
         ++index;
-        if (10 == score) {
-            scoreArray[index] = -1;
+        if (score == 10) {
             ++index;
         }
         return index;
@@ -35,16 +34,17 @@ public class BowlingGame {
         int eachRoundScore = 0;
         int roundIndex = 2 * (round - 1);
         if (scoreArray[roundIndex] == 10) {
-            eachRoundScore = scoreArray[roundIndex] + (-2 != scoreArray[roundIndex += 2] ? scoreArray[roundIndex] : 0);
-            if (10 == scoreArray[roundIndex]) {
-                eachRoundScore += (-2 != scoreArray[roundIndex += 2] ? scoreArray[roundIndex] : 0);
+            eachRoundScore = scoreArray[roundIndex] + scoreArray[roundIndex += 2];
+            //round 10
+            if (scoreArray[roundIndex] == 10) {
+                eachRoundScore += scoreArray[roundIndex += 2];
             } else {
-                eachRoundScore += (-2 != scoreArray[++roundIndex] ? scoreArray[roundIndex] : 0);
+                eachRoundScore += scoreArray[++roundIndex];
             }
         } else {
-            eachRoundScore = scoreArray[roundIndex] + (-2 != scoreArray[++roundIndex] ? scoreArray[roundIndex] : 0);
-            if (10 == eachRoundScore) {
-                eachRoundScore += (-2 != scoreArray[++roundIndex] ? scoreArray[roundIndex] : 0);
+            eachRoundScore = scoreArray[roundIndex] + scoreArray[++roundIndex];
+            if (eachRoundScore == 10) {
+                eachRoundScore += scoreArray[++roundIndex];
             }
         }
         return eachRoundScore;
