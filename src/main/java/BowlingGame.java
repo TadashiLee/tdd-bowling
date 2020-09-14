@@ -35,7 +35,7 @@ public class BowlingGame {
         int roundIndex = 2 * (round - 1);
         if (scoreArray[roundIndex] == 10) {
             eachRoundScore = scoreArray[roundIndex] + scoreArray[roundIndex += 2];
-            //round 10
+            //judge round 10 the second is 10 or not when the first is strike
             if (scoreArray[roundIndex] == 10) {
                 eachRoundScore += scoreArray[roundIndex += 2];
             } else {
